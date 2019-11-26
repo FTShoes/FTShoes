@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS product (
     producer_id VARCHAR(100) NOT NULL,
     typeProduct VARCHAR(100),
     size INT,
-    amountProduct VARCHAR(100) NOT NULL,
+    amountProduct INT,
 	price DECIMAL(19,2),
     dayInput DATE,
     CONSTRAINT pk_product PRIMARY KEY(product_id),
