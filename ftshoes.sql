@@ -41,6 +41,7 @@ CREATE TABLE IF NOT EXISTS product (
     size INT,
     amountProduct INT,
 	price DECIMAL(19,2),
+    priceSale DECIMAL(19,2),
     dayInput DATE,
     CONSTRAINT pk_product PRIMARY KEY(product_id),
     CONSTRAINT fk_product_producer FOREIGN KEY (producer_id) REFERENCES producer(producer_id) ON DELETE CASCADE
@@ -95,11 +96,11 @@ INSERT INTO `ftshoes`.`producer` (`producer_id`, `nameProducer`, `phone`, `addre
 INSERT INTO `ftshoes`.`producer` (`producer_id`, `nameProducer`, `phone`, `address`) VALUES ('pro04', 'CTy Dsdfb', '09876243232', '187 Hoang Van Thu Q.PN TPHCM');
 
 
-INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `dayInput`) VALUES ('sp01', 'giay ', 'pro01', 'giay nam', '40', '20', '400000', '2019/10/25');
-INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `dayInput`) VALUES ('sp02', 'vo', 'pro01', 'phu kien', '35', '20', '20000', '2019/12/05');
-INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `dayInput`) VALUES ('sp03', 'giay ', 'pro02', 'giay nam', '40', '20', '400000', '2019/10/25');
-INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `dayInput`) VALUES ('sp04', 'giay ', 'pro03', 'giay nu', '35', '10', '2000000', '2018/1/25');
-INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `dayInput`) VALUES ('sp05', 'giay ', 'pro04', 'giay nam', '40', '20', '400000', '2017/10/05');
+INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `priceSale`, `dayInput`) VALUES ('sp01', 'giay ', 'pro01', 'giay nam', '40', '20', '400000', '450000', '2019/10/25');
+INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `priceSale`, `dayInput`) VALUES ('sp02', 'vo', 'pro01', 'phu kien', '35', '20', '20000', '400000', '2019/12/05');
+INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `priceSale`, `dayInput`) VALUES ('sp03', 'giay ', 'pro02', 'giay nam', '40', '20', '400000', '500000', '2019/10/25');
+INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `priceSale`, `dayInput`) VALUES ('sp04', 'giay ', 'pro03', 'giay nu', '35', '10', '2000000', '4000000', '2018/1/25');
+INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `typeProduct`, `size`, `amountProduct`, `price`, `priceSale`, `dayInput`) VALUES ('sp05', 'giay ', 'pro04', 'giay nam', '40', '20', '400000', '450000', '2017/10/05');
 
 
 INSERT INTO `ftshoes`.`saleInvoices` (`sale_id`, `employees_id`, `customer_id`, `nameCustomer`, `phoneCustomer`, `dayOutput`, `totalMoney`, `totalInput`, `tolalOutput`) VALUES ('hd0001', 'nv1', '1234567890', 'le van A ', '09090909', '2019/02/26', '5000000', '6000000', '100000');
