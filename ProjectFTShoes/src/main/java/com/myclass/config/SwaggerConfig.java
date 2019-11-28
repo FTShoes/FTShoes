@@ -20,7 +20,7 @@ public class SwaggerConfig {
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
 				.select()
-				.apis(RequestHandlerSelectors.basePackage("com.mycl	ass.admin.controller"))
+				.apis(RequestHandlerSelectors.basePackage("com.myclass.admin.controller"))
 				.build()
 				.apiInfo(new ApiInfo(
 						"RESTful API", 
