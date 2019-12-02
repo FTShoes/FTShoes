@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,67 +21,61 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.myclass.dto.RoleDto;
-import com.myclass.dto.RoleEditDto;
 import com.myclass.entity.Role;
-import com.myclass.service.RoleService;
+import com.myclass.repository.RoleRepository;
 
 @RestController
 @RequestMapping("api/admin/role")
 @CrossOrigin("*")
 public class AdminRoleController {
-
+	
 	@Autowired
-	private RoleService roleService;
-
+	RoleRepository roleRepository ;
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
 	@GetMapping("")
 	public Object getAll() {
-		List<Role> role = roleService.getAll();
-		if (role == null) {
-			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
-		}
-		return new ResponseEntity<List<Role>>(role, HttpStatus.OK);
+		// Tạo đối tượng session để truy vấn database
+		Session session = sessionFactory.openSession(); // Nhân viên ngân hàng
+			List<Role> roles = roleRepository.findAll();
+			if(roles==null) {
+				return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+			}
+			return new ResponseEntity<List<Role>>(roles, HttpStatus.OK);
 	}
 
 	@PostMapping("")
-	public Object add(@Valid @RequestBody RoleDto roleDto, BindingResult errors) {
-		if (errors.hasErrors()) {
-			return new ResponseEntity<Object>(errors.getAllErrors(), HttpStatus.BAD_REQUEST);
+	public Object add(@Valid @RequestBody Role role, BindingResult erros) {
+		if (erros.hasErrors())
+			return new ResponseEntity<Object>(erros.getAllErrors(), HttpStatus.BAD_REQUEST);
+		// Tạo id cho role
+		role.setId(UUID.randomUUID().toString());
+		if (roleRepository.add(role)) {
+			//Trả về đối tượng thêm vào
+			return new ResponseEntity<Role>(role, HttpStatus.CREATED);
 		}
-		roleDto.setId(UUID.randomUUID().toString());
-		if (roleService.save(roleDto)) {
-			return new ResponseEntity<RoleDto>(roleDto, HttpStatus.CREATED);
-		}
-		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
-	}
-
-	@PutMapping("/{id}")
-	public Object update(@PathVariable("id") String id, @RequestBody RoleEditDto roleEditDto, BindingResult errors) {
-		if (errors.hasErrors())
-			return new ResponseEntity<Object>(errors.getAllErrors(), HttpStatus.BAD_REQUEST);
-		roleEditDto.setId(id);
-		if (roleService.update(id, roleEditDto)) {
-			return new ResponseEntity<RoleEditDto>(roleEditDto, HttpStatus.OK);
-		}
-
-		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
-	}
-
-	@DeleteMapping("/{id}")
-	public Object delete(@PathVariable("id") String id) {
-		if (roleService.delete(id)) {
-			return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
-		}
+		//Thêm thất bại
 		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
 	}
 	
-
-	@GetMapping("/{id}")
-	public Object findById(@PathVariable("id") String id) {
-		Role role = roleService.findById(id);
-		if (role != null) {
+	@PutMapping("/{id}")
+	public Object edit(@PathVariable("id") String id , @RequestBody Role role) {
+		// Tạo id cho role
+		role.setId(id);
+		if(roleRepository.saveorUpdate(role)) {
 			return new ResponseEntity<Role>(role, HttpStatus.OK);
 		}
-		return new ResponseEntity<String>("Khong Tim Thay Producer Trong DataBase", HttpStatus.NO_CONTENT);
+		//Update thất bại
+		return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);	
+	}
+	
+	@DeleteMapping("/{id}")
+	public Object remove(@PathVariable("id") String id) {
+		if(roleRepository.removeById(id)) {
+			return new ResponseEntity<Role>(HttpStatus.OK);
+		}
+		return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 	}
 }

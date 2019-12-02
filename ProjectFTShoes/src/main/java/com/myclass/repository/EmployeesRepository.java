@@ -10,5 +10,4 @@ public interface EmployeesRepository {
 	Employees findByEmail(String email);
 	boolean saveorUpdate(Employees employees);
 	boolean removeById(String id);
-	
 }

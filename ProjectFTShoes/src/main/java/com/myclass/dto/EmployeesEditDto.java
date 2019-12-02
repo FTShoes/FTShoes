@@ -7,29 +7,44 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-public class EmployeesEditDto {
+import org.hibernate.validator.constraints.Length;
 
+import com.myclass.entity.Role;
+
+public class EmployeesEditDto {
+	@Id
+	@Column(name ="employees_id")
 	private String id;
 	
-	@NotBlank(message = "cap nhat ten Employee")
+	@NotBlank(message = "Vui lòng nhập họ tên!")
 	private String name;
 	
-	@NotBlank(message = "cap nhat email")
-	@Email(message = "Emailkhong dung dinh dang, vui long xem lai!")
+	@NotBlank(message = "Vui lòng nhập email")
+	@Email(message = "Email không đúng quy định")
+	@Column(name ="email")
 	private String email;
-	@NotBlank(message = "cap nhat sdt")
-	private String phone;
-	private String address;
-	private String gender;
-	private String password;
-	private String roleId;
 	
+	@Column(name ="phone")
+	private String phone;
+	
+	@Column(name ="address")
+	private String address;
+	
+	@Column(name ="genderEmployees")
+	private String gender;
+	
+	@Column(name="role_id")
+	private String roleId;
+	private Role role;
+	
+	@Column(name="password")
+	private String password;
+
 	public EmployeesEditDto() {
 		// TODO Auto-generated constructor stub
 	}
-
 	public EmployeesEditDto(String id, String name, String email, String phone, String address, String gender,
-			String password, String roleId) {
+			String roleId, Role role, String password) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -37,8 +52,9 @@ public class EmployeesEditDto {
 		this.phone = phone;
 		this.address = address;
 		this.gender = gender;
-		this.password = password;
 		this.roleId = roleId;
+		this.role = role;
+		this.password = password;
 	}
 
 	public String getId() {
@@ -89,19 +105,27 @@ public class EmployeesEditDto {
 		this.gender = gender;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getRoleId() {
 		return roleId;
 	}
 
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
+	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

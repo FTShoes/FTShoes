@@ -6,7 +6,7 @@ import com.myclass.entity.Role;
 
 public interface RoleRepository {
 	List<Role> findAll();
-	boolean saveOrUpdate(Role role);
+	boolean add(Role role);
+	boolean saveorUpdate( Role role);
 	boolean removeById(String id);
-	Role findById(String id);
 }
