@@ -4,6 +4,7 @@ import java.util.Collections;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
@@ -24,10 +25,10 @@ public class SwaggerConfig {
 				.build()
 				.apiInfo(new ApiInfo(
 						"RESTful API", 
-						"RESTful API cho Elearning App", 
+						"RESTful API cho FTShoes shop", 
 						"", 
 						"",
-						new Contact("Nguyễn Lan", "", "nguyenlanyth@gmail.com"), 
+						new Contact("FTShoes shop", "", "ftshoes@gmail.com"), 
 						"", 
 						"",
 						Collections.EMPTY_LIST

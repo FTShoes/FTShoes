@@ -33,14 +33,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class AdminProducerController {
 
 	@Autowired
-	private SessionFactory sessionFactory;
-
-	@Autowired
 	private ProducerService producerService;
 
 	@GetMapping("")
 	public Object getAll() {
-		Session session = sessionFactory.openSession();
 		List<Producer> producer = producerService.getAll();
 		if (producer == null) {
 			return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
@@ -63,7 +59,6 @@ public class AdminProducerController {
 	@PutMapping("/{id}")
 	public Object update(@PathVariable("id") String id, @RequestBody ProducerEditDto producerEditDto) {
 		producerEditDto.setId(id);
-		// Gọi hàm cập nhật của repository
 		if (producerService.update(id, producerEditDto)) {
 			return new ResponseEntity<ProducerEditDto>(producerEditDto, HttpStatus.OK);
 		}
@@ -85,7 +80,7 @@ public class AdminProducerController {
 		if (producer != null) {
 			return new ResponseEntity<Producer>(producer, HttpStatus.OK);
 		}
-		return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
+		return new ResponseEntity<String>("Khong Tim Thay Producer Trong DataBase",HttpStatus.NO_CONTENT);
 	}
 
 }

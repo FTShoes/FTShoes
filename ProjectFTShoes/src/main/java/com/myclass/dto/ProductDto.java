@@ -4,9 +4,12 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotBlank;
 
 import com.myclass.entity.Producer;
+import com.myclass.entity.Role;
 
 public class ProductDto {
 
@@ -21,6 +24,9 @@ public class ProductDto {
 	private Date dayInput;
 	private String producer_id;
 	
+	@ManyToOne
+	@JoinColumn(name = "role_id", insertable = false, updatable = false)
+	private Producer producer;
 
 	public ProductDto() {
 		// TODO Auto-generated constructor stub

@@ -7,44 +7,29 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-import org.hibernate.validator.constraints.Length;
-
-import com.myclass.entity.Role;
-
 public class EmployeesEditDto {
-	@Id
-	@Column(name ="employees_id")
+
 	private String id;
 	
-	@NotBlank(message = "Vui lòng nhập họ tên!")
+	@NotBlank(message = "cap nhat ten Employee")
 	private String name;
 	
-	@NotBlank(message = "Vui lòng nhập email")
-	@Email(message = "Email không đúng quy định")
-	@Column(name ="email")
+	@NotBlank(message = "cap nhat email")
+	@Email(message = "Emailkhong dung dinh dang, vui long xem lai!")
 	private String email;
-	
-	@Column(name ="phone")
+	@NotBlank(message = "cap nhat sdt")
 	private String phone;
-	
-	@Column(name ="address")
 	private String address;
-	
-	@Column(name ="genderEmployees")
 	private String gender;
-	
-	@Column(name="role_id")
-	private String roleId;
-	private Role role;
-	
-	@Column(name="password")
 	private String password;
-
+	private String roleId;
+	
 	public EmployeesEditDto() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public EmployeesEditDto(String id, String name, String email, String phone, String address, String gender,
-			String roleId, Role role, String password) {
+			String password, String roleId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -52,9 +37,8 @@ public class EmployeesEditDto {
 		this.phone = phone;
 		this.address = address;
 		this.gender = gender;
-		this.roleId = roleId;
-		this.role = role;
 		this.password = password;
+		this.roleId = roleId;
 	}
 
 	public String getId() {
@@ -105,27 +89,19 @@ public class EmployeesEditDto {
 		this.gender = gender;
 	}
 
-	public String getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
-	}
-
-	public Role getRole() {
-		return role;
-	}
-
-	public void setRole(Role role) {
-		this.role = role;
-	}
-
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 }

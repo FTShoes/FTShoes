@@ -1,12 +1,15 @@
 package com.myclass.entity;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -16,11 +19,16 @@ public class Product {
 	@Id
 	@Column(name = "product_id")
 	private String id;
-
+	@OneToMany(mappedBy = "product" , fetch = FetchType.LAZY)
+	private List<DetailInvoices> detailInvoices;
+	
 	@Column(name = "nameProduct")
 	private String name;
 
 	private String producer_id;
+	@ManyToOne
+	@JoinColumn(name = "producer_id" ,insertable=false , updatable=false)
+	private Producer producer;
 
 	@Column(name = "typeProduct")
 	private String type;
@@ -32,11 +40,8 @@ public class Product {
 	private double price;
 	private double priceSale;
 	private Date dayInput;
-
-	@ManyToOne
-	@JoinColumn(name = "producer_id", insertable = false, updatable = false)
-	private Producer producer;
-
+	
+	
 	public Product() {}
 
 	

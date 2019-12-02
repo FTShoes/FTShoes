@@ -64,7 +64,7 @@ public class AdminProductController {
 	@PutMapping("/{id}")
 	public Object update(@PathVariable("id") String id, @RequestBody ProductEditDto productEditDto) {
 		productEditDto.setId(id);
-		// Gọi hàm cập nhật của repository
+		// Gá»�i hÃ m cáº­p nháº­t cá»§a repository
 		if (productService.update(id, productEditDto)) {
 			return new ResponseEntity<ProductEditDto>(productEditDto, HttpStatus.OK);
 		}

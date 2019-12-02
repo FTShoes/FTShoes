@@ -21,28 +21,29 @@ public class HibernateConfig {
 		source.setDriverClassName("com.mysql.cj.jdbc.Driver");
 		source.setUrl("jdbc:mysql://localhost:3306/ftshoes");
 		source.setUsername("root");
-		source.setPassword("123456");
+		source.setPassword("lengochau1999");
 		return source;
 	}
+	
 	@Bean
-
-	public LocalSessionFactoryBean sessionFactoryBean() {
+	public LocalSessionFactoryBean sessionFactory() {
 		LocalSessionFactoryBean bean = new LocalSessionFactoryBean();
 		bean.setDataSource(dataSource());
 		bean.setPackagesToScan("com.myclass.entity");
 		
 		Properties properties = new Properties();
-		properties.put("hiberate.dialect","org.hibernate.dialect.MySQLDialect");
-		properties.put("hiberate.show_sql",true);
-		properties.put("hiberate.format_Sql",true);
+		properties.put("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+		properties.put("hibernate.show_sql", true);
+		properties.put("hibernate.format_sql", true);
 		
+		bean.setHibernateProperties(properties);
 		return bean;
 	}
+
 	@Bean
 	public HibernateTransactionManager transactionManager() {
 		HibernateTransactionManager manager = new HibernateTransactionManager();
-		manager.setSessionFactory(sessionFactoryBean().getObject());
-		
+		manager.setSessionFactory(sessionFactory().getObject());
 		return manager;
 	}
 }

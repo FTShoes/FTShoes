@@ -1,0 +1,9 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/myclass/admin/controller/AdminDetailInvoiceController.java=UTF-8
+encoding//src/main/java/com/myclass/admin/controller/AdminEmployeesController.java=UTF-8
+encoding//src/main/java/com/myclass/admin/controller/AdminProducerController.java=UTF-8
+encoding//src/main/java/com/myclass/admin/controller/AdminProductController.java=UTF-8
+encoding//src/main/java/com/myclass/dto/RoleDto.java=UTF-8
+encoding//src/main/java/com/myclass/dto/RoleEditDto.java=UTF-8
+encoding//src/main/java/com/myclass/entity/Role.java=UTF-8
+encoding//src/main/java/com/myclass/service/impl/EmployeesServiceImpl.java=UTF-8

@@ -10,7 +10,6 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.myclass.entity.Producer;
 import com.myclass.entity.Product;
 import com.myclass.repository.ProductRepository;
 

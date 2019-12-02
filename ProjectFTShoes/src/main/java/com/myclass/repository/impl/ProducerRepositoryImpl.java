@@ -12,7 +12,6 @@ import org.springframework.stereotype.Repository;
 
 import com.myclass.entity.Producer;
 import com.myclass.repository.ProducerRepository;
-import com.myclass.service.ProducerService;
 
 @Repository
 @Transactional(rollbackOn = Exception.class)
