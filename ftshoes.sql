@@ -64,13 +64,15 @@ CREATE TABLE IF NOT EXISTS saleInvoices (
 
 /*--TABLE DETAIL INVOICES (CHI TIET HOA DON) */
 CREATE TABLE IF NOT EXISTS detailInvoices (
+	id VARCHAR(100) NOT NULL ,
 	sale_id VARCHAR(100) NOT NULL,
     product_id VARCHAR(100) NOT NULL,
     amount INT,
     price DECIMAL(19,2),
     total DECIMAL(19,2),
-    CONSTRAINT fk_pk_detailInvoices_saleInvoices FOREIGN KEY (sale_id) REFERENCES saleInvoices(sale_id) ON DELETE CASCADE,
-    CONSTRAINT fk_pk_detailInvoices_product FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE  
+	CONSTRAINT pk_detailInvoices PRIMARY KEY(id),
+    CONSTRAINT fk_detailInvoices FOREIGN KEY (sale_id) REFERENCES saleInvoices(sale_id) ON DELETE CASCADE,
+    CONSTRAINT fk_detailInvoices_product FOREIGN KEY (product_id) REFERENCES product(product_id) ON DELETE CASCADE  
 );
 
 SELECT * FROM ftshoes.roles;
@@ -106,8 +108,8 @@ INSERT INTO `ftshoes`.`product` (`product_id`, `nameProduct`, `producer_id`, `ty
 INSERT INTO `ftshoes`.`saleInvoices` (`sale_id`, `employees_id`, `customer_id`, `nameCustomer`, `phoneCustomer`, `dayOutput`, `totalMoney`, `totalInput`, `tolalOutput`) VALUES ('hd0001', 'nv1', '1234567890', 'le van A ', '09090909', '2019/02/26', '5000000', '6000000', '100000');
 
 
-INSERT INTO `ftshoes`.`detailInvoices` (`sale_id`, `product_id`, `amount`, `price`, `total`) VALUES ('hd0001', 'sp01', '5', '20000', '100000');
-INSERT INTO `ftshoes`.`detailInvoices` (`sale_id`, `product_id`, `amount`, `price`, `total`) VALUES ('hd0001', 'sp01', '5', '20000', '100000');
-INSERT INTO `ftshoes`.`detailInvoices` (`sale_id`, `product_id`, `amount`, `price`, `total`) VALUES ('hd0001', 'sp02', '6', '20000', '120000');
+INSERT INTO `ftshoes`.`detailInvoices` (`id`,`sale_id`, `product_id`, `amount`, `price`, `total`) VALUES ('1','hd0001', 'sp01', '5', '20000', '100000');
+INSERT INTO `ftshoes`.`detailInvoices` (`id`,`sale_id`, `product_id`, `amount`, `price`, `total`) VALUES ('2','hd0001', 'sp05', '5', '20000', '100000');
+INSERT INTO `ftshoes`.`detailInvoices` (`id`,`sale_id`, `product_id`, `amount`, `price`, `total`) VALUES ('3','hd0001', 'sp04', '6', '20000', '120000');
 
 
